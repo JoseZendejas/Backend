@@ -71,5 +71,11 @@ def borrar_Tarea(tarea_id: int, db: Session = Depends(get_db)):
     respuesta = esquema.Respuesta(mensaje = "Tarea Eliminada")
     return respuesta
 
+@app.get('/Tarea/{tarea_id}', response_model=esquema.Tarea)
+def mostrar_Tareas(tarea_id: int, db: Session = Depends(get_db)):
+    tarea = db.query(modelo.Tareas).filter_by(id=tarea_id).first()
+    if not tarea:
+        raise HTTPException(status_code=404, detail="Tarea no encontrada")
+    return tarea
 
 
