@@ -33,7 +33,7 @@ def mostrar_Tareas(db: Session = Depends(get_db)):
     return tareas
 
 # Crear una nueva tarea
-@app.put('/Tarea/', response_model=esquema.Tarea)
+@app.post('/Tarea/', response_model=esquema.Tarea)
 def crear_Tarea(entrada: esquema.Tarea, db: Session = Depends(get_db)):
     tarea = modelo.Tareas(
         title=entrada.title,
